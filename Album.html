@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Media Preview</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align items at the top */
+            min-height: 100vh;
+        }
+        .media-container {
+            width: 300px; /* Control the width of the preview area */
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column; /* Stack videos vertically */
+            align-items: center;
+        }
+        img, video {
+            width: 300%; /* Ensure the videos fit within the container */
+            height: auto;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .full-screen-media {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .full-screen-media img,
+        .full-screen-media video {
+            max-width: 90%; 
+            max-height: 90%;
+        }
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #fff;
+            border: none;
+            color: #000;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+    </style>
+</head>
+<body>
+
+<div class="media-container">
+    <video controls onclick="openFullScreenVideo(this)">
+        <source src="lib/Design/Logo Animate.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <video controls onclick="openFullScreenVideo(this)">
+        <source src="lib/Design/versage.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+  
+    <video controls onclick="openFullScreenVideo(this)">
+        <source src="lib/Design/monster.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<div id="fullScreenMedia" class="full-screen-media">
+    <button class="close-button" onclick="closeFullScreen()">Close</button>
+    <img id="fullScreenImage" src="" alt="Full Screen Image">
+    <video id="fullScreenVideo" class="full-screen-video" controls></video>
+</div>
+
+<script>
+    function openFullScreenVideo(media) {
+        const fullScreenMedia = document.getElementById('fullScreenMedia');
+        const fullScreenImage = document.getElementById('fullScreenImage');
+        const fullScreenVideo = document.getElementById('fullScreenVideo');
+        
+        fullScreenVideo.src = media.querySelector('source').src;
+        fullScreenVideo.style.display = 'block';
+        fullScreenImage.style.display = 'none';
+
+        fullScreenMedia.style.display = 'flex';
+    }
+
+    function closeFullScreen() {
+        const fullScreenMedia = document.getElementById('fullScreenMedia');
+        const fullScreenImage = document.getElementById('fullScreenImage');
+        const fullScreenVideo = document.getElementById('fullScreenVideo');
+        
+        fullScreenMedia.style.display = 'none';
+        fullScreenImage.src = '';
+        fullScreenVideo.src = '';
+    }
+
+    // Optional: Add escape key functionality to close full-screen mode
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            closeFullScreen();
+        }
+    });
+</script>
+
+</body>
+</html>
