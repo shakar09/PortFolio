@@ -1,3 +1,9 @@
+window.onload = function() {
+
+
+
+
+
 (function ($) {
     "use strict";
 
@@ -113,5 +119,6 @@
         items: 1
     });
     
-})(jQuery);
+})(jQuery)    
+};
 
